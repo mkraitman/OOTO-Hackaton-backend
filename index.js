@@ -1,12 +1,10 @@
-const express = require('express');
+const express = require("express");
 const app = express();
+const product = require("./api/product");
 
-app.listen(process.env.PORT || 3000);
+app.use(express.json({ extended: false }));
 
-app.use(express.static('public'))
+app.use("/api/product", product);
 
-app.get('/', (req, res) => {
-    res.sendFile('index.html', {root: path.join(__dirname, 'public')});
-  })
-
-module.exports = app
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
